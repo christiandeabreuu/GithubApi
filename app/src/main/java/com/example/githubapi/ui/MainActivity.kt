@@ -17,18 +17,25 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: RepositoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val response = RetrofitClient.instance.getTopRepositories(page = 1)
-                response.items.forEach {
-                    Log.d("GitHubAPI", "Repositório: ${it.name}, ⭐ ${it.stargazers_count}")
-                }
-            } catch (e: Exception) {
-                Log.e("GitHubAPI", "Erro na requisição: ${e.message}")
-            }
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        adapter = RepositoryAdapter()
+
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
+        // Observando mudanças no LiveData
+        viewModel.repositories.observe(this) { list ->
+            adapter.submitList(list)
         }
+
+        viewModel.fetchRepositories()
     }
 }

@@ -5,6 +5,7 @@ data class GitHubResponse(
 )
 
 data class Repository(
+    val id: Int,
     val name: String,
     val stargazers_count: Int,
     val forks_count: Int,
@@ -13,5 +14,5 @@ data class Repository(
 
 data class Owner(
     val login: String,
-    val avatar_rl: String
+    val avatar_url: String
 )
