@@ -1,6 +1,7 @@
 package com.example.githubapi.ui
 
 import android.os.Bundle
+import android.util.Log
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        Log.d("Lifecycle", "HomeActivity foi recriada!")
+
 
         adapter = RepositoryAdapter()
 
@@ -23,7 +26,6 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Observando os dados paginados
         lifecycleScope.launch {
             viewModel.getRepositories().collect { pagingData ->
                 adapter.submitData(pagingData)

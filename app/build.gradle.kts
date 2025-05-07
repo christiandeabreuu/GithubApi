@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -33,6 +34,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
 }
 
 dependencies {
@@ -53,4 +55,9 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin)
     implementation(libs.paging)
+    implementation(libs.jetbrains.kotlin.coroutines.test)
+    testImplementation(libs.mockk)
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }
