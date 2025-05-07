@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import coil.load
 import com.example.githubapi.R
 import com.example.githubapi.data.Repository
 
-class RepositoryAdapter : ListAdapter<Repository, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class RepositoryAdapter : PagingDataAdapter<Repository, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repository>() {
@@ -41,12 +42,12 @@ class RepositoryAdapter : ListAdapter<Repository, RepositoryAdapter.ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = getItem(position)
-        holder.name.text = repo.name
-        holder.stars.text = "⭐ ${repo.stargazers_count}"
-        holder.forks.text = "🔁 ${repo.forks_count}"
-        holder.ownerName.text = repo.owner.login
+        holder.name.text = repo?.name
+        holder.stars.text = "⭐ ${repo?.stargazers_count}"
+        holder.forks.text = "🔁 ${repo?.forks_count}"
+        holder.ownerName.text = repo?.owner?.login
 
-        holder.ownerImage.load(repo.owner.avatar_url) {
+        holder.ownerImage.load(repo?.owner?.avatar_url) {
             placeholder(R.drawable.ic_launcher_background)
             error(R.drawable.ic_launcher_foreground)
         }

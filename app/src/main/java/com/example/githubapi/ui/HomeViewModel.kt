@@ -1,23 +1,16 @@
 package com.example.githubapi.ui
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import com.example.githubapi.domain.RepoGitHubUseCase
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import kotlinx.coroutines.flow.Flow
+import com.example.githubapi.data.RepoGitHubRepository
 import com.example.githubapi.data.Repository
 
-class HomeViewModel(private val useCase: RepoGitHubUseCase) : ViewModel() {
+class HomeViewModel(private val repository: RepoGitHubRepository) : ViewModel() {
 
-    private val _repositories = MutableLiveData<List<Repository>>()
-    val repositories: LiveData<List<Repository>> = _repositories
-
-    fun fetchRepositories(page: Int = 1) {
-        viewModelScope.launch {
-            val repos = useCase.execute(page)
-            _repositories.postValue(repos)
-        }
+    fun getRepositories(): Flow<PagingData<Repository>> {
+        return repository.getTopRepositories().cachedIn(viewModelScope)
     }
 }

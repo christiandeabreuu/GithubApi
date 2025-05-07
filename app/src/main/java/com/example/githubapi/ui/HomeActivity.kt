@@ -3,9 +3,11 @@ package com.example.githubapi.ui
 import android.os.Bundle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapi.R
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
@@ -21,10 +23,11 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        viewModel.repositories.observe(this) { list ->
-            adapter.submitList(list)
+        // Observando os dados paginados
+        lifecycleScope.launch {
+            viewModel.getRepositories().collect { pagingData ->
+                adapter.submitData(pagingData)
+            }
         }
-
-        viewModel.fetchRepositories()
     }
 }
