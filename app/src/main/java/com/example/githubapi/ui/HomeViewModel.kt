@@ -13,4 +13,5 @@ class HomeViewModel(private val repository: RepoGitHubRepository) : ViewModel() 
     fun getRepositories(): Flow<PagingData<Repository>> {
         return repository.getTopRepositories().cachedIn(viewModelScope)
     }
+
 }
