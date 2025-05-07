@@ -12,7 +12,7 @@ import coil.load
 import com.example.githubapi.R
 import com.example.githubapi.data.Repository
 
-class RepositoryAdapter : ListAdapter<Repository, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter : ListAdapter<Repository, HomeAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repository>() {

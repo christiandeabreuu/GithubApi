@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
 }
+
 
 android {
     namespace = "com.example.githubapi"
@@ -33,7 +35,15 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
+
+
+
 
 dependencies {
 
@@ -52,4 +62,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.coil)
     implementation(libs.koin)
+    implementation(libs.room)
+    implementation(libs.room.compiler)
+    implementation(libs.room.ktx)
 }

@@ -9,13 +9,13 @@ import com.example.githubapi.R
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
-    private lateinit var adapter: RepositoryAdapter
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        adapter = RepositoryAdapter()
+        adapter = HomeAdapter()
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
