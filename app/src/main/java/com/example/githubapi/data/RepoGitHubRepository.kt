@@ -8,7 +8,7 @@ class RepoGitHubRepository(private val api: GitHubService) {
             val response = api.getTopRepositories("language:kotlin", "stars", page)
             response.items
         } catch (e: Exception) {
-            emptyList() // Retorna lista vazia se houver erro
+            emptyList()
         }
     }
 }
