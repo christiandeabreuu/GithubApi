@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.core.context.startKoin
 import org.koin.android.ext.koin.androidContext
 import com.example.githubapi.di.appModule
+import com.example.githubapi.di.databaseModule
 import com.example.githubapi.di.networkModule
 
 class GitHubApp : Application() {
@@ -11,7 +12,7 @@ class GitHubApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@GitHubApp)
-            modules(appModule, networkModule)
+            modules(appModule, networkModule, databaseModule)
         }
     }
 }

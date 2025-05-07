@@ -39,6 +39,7 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 room = { group = "androidx.room", name = "room-runtime", version = "2.5.2" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version = "2.5.2" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.5.2" }
+room-paging = { group = "androidx.room", name = "room-paging", version = "2.5.2" }
 
 
 [plugins]
