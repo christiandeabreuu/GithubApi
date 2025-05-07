@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.jetbrains.kotlinx.serialization.json)
-    implementation(libs.coil)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.coil)
+    implementation(libs.koin)
 }

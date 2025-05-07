@@ -1,37 +1,35 @@
 package com.example.githubapi.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapi.R
+import com.example.githubapi.data.RepoGitHubRepository
 import com.example.githubapi.data.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.githubapi.domain.RepoGitHubUseCase
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: MainViewModel
+class HomeActivity : AppCompatActivity() {
+    private lateinit var viewModel: HomeViewModel
     private lateinit var adapter: RepositoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        val repository = RepoGitHubRepository(RetrofitClient.instance)
+        val useCase = RepoGitHubUseCase(repository)
+
+        val factory = HomeViewModelFactory(useCase)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+
         adapter = RepositoryAdapter()
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Observando mudanças no LiveData
         viewModel.repositories.observe(this) { list ->
             adapter.submitList(list)
         }
