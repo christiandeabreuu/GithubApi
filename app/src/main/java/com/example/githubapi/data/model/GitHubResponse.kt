@@ -1,4 +1,4 @@
-package com.example.githubapi.data
+package com.example.githubapi.data.model
 
 data class GitHubResponse(
     val items: List<GitHubRepo>

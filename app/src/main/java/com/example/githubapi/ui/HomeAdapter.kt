@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.githubapi.R
-import com.example.githubapi.data.GitHubRepo
+import com.example.githubapi.data.model.GitHubRepo
 
 class RepositoryAdapter : PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 

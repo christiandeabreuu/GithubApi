@@ -1,7 +1,9 @@
-package com.example.githubapi.data
+package com.example.githubapi.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.githubapi.data.model.GitHubRepo
+import com.example.githubapi.data.network.GitHubService
 
 class RepoPagingSource(private val api: GitHubService) : PagingSource<Int, GitHubRepo>() {
 
