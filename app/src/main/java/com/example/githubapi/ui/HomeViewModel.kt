@@ -12,15 +12,13 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val usecase: RepoGitHubUseCase) : ViewModel() {
 
-    private val _repositories = MutableLiveData<PagingData<GitHubRepo>>(PagingData.empty())
-    val repositories: LiveData<PagingData<GitHubRepo>> = _repositories
+    private val _repositories = MutableLiveData<List<GitHubRepo>>()
+    val repositories: LiveData<List<GitHubRepo>> = _repositories
 
     fun getRepositories() {
         viewModelScope.launch {
-            usecase.execute().cachedIn(viewModelScope).collect { pagingData ->
-                _repositories.value = pagingData
-            }
+            val data = usecase.execute()
+            _repositories.postValue(data)
         }
     }
-
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class RepoGitHubUseCase(private val repository: RepoGitHubRepository) {
 
-    fun execute(): Flow<PagingData<GitHubRepo>> {
+    suspend fun execute(): List<GitHubRepo> {
         return repository.getTopRepositories()
     }
 }

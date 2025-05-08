@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val appModule = module {
 
     // Repository
-    factory { RepoGitHubRepository(get()) }
+    factory { RepoGitHubRepository(get(), get()) }
 
     // Use Case
     factory { RepoGitHubUseCase(get()) }

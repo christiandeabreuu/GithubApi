@@ -15,21 +15,22 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        adapter = RepositoryAdapter()
-        setupObservers()
         setupRecyclerView()
-        viewModel.getRepositories()
+        setupObservers()
+        viewModel.getRepositories() // 🔥 Chamamos para buscar os dados
     }
 
     private fun setupRecyclerView() {
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        adapter = RepositoryAdapter()
+        findViewById<RecyclerView>(R.id.recycler_view).apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            adapter = this@HomeActivity.adapter
+        }
     }
 
     private fun setupObservers() {
-        viewModel.repositories.observe(this) { pagingData ->
-            adapter.submitData(lifecycle, pagingData)
+        viewModel.repositories.observe(this) { repositories ->
+            adapter.updateData(repositories) // 🔥 Atualiza o adapter com uma lista normal
         }
     }
 }
