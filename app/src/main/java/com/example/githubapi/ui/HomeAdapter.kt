@@ -12,9 +12,20 @@ import coil.load
 import com.example.githubapi.R
 import com.example.githubapi.data.model.GitHubRepo
 
-class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
+class RepositoryAdapter :
+    PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var repositories: List<GitHubRepo> = emptyList()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubRepo>() {
+            override fun areItemsTheSame(oldItem: GitHubRepo, newItem: GitHubRepo): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: GitHubRepo, newItem: GitHubRepo): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.repo_name)
@@ -25,27 +36,22 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo = repositories[position] // 🔥 Agora usamos uma lista normal
-        holder.name.text = repo.name
-        holder.stars.text = "⭐ ${repo.stargazers_count}"
-        holder.forks.text = "🔁 ${repo.forks_count}"
-        holder.ownerName.text = repo.owner.login
+        val repo = getItem(position)
 
-        holder.ownerImage.load(repo.owner.avatar_url) {
+        holder.name.text = repo?.name
+        holder.stars.text = "⭐ ${repo?.stargazers_count}"
+        holder.forks.text = "🔁 ${repo?.forks_count}"
+        holder.ownerName.text = repo?.owner?.login
+
+        holder.ownerImage.load(repo?.owner?.avatar_url) {
             placeholder(R.drawable.ic_launcher_background)
             error(R.drawable.ic_launcher_foreground)
         }
-    }
-
-    override fun getItemCount(): Int = repositories.size
-
-    fun updateData(newData: List<GitHubRepo>) { // 🔥 Método para atualizar a lista
-        repositories = newData
-        notifyDataSetChanged()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.githubapi
+package com.example.githubapi.utils
 
 import com.example.githubapi.data.local.RepositoryEntity
 import com.example.githubapi.data.model.GitHubRepo

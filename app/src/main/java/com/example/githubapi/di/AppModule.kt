@@ -40,5 +40,4 @@ val databaseModule = module {
     }
 
     single { get<GitHubDatabase>().repositoryDao() }
-
 }

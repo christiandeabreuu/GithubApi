@@ -2,9 +2,12 @@ package com.example.githubapi.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapi.R
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -17,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupObservers()
-        viewModel.getRepositories() // 🔥 Chamamos para buscar os dados
+        viewModel.getRepositories()
     }
 
     private fun setupRecyclerView() {
@@ -29,8 +32,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.repositories.observe(this) { repositories ->
-            adapter.updateData(repositories) // 🔥 Atualiza o adapter com uma lista normal
+        lifecycleScope.launch {
+            viewModel.repositories.collectLatest { pagingData ->
+                adapter.submitData(pagingData)
+            }
         }
     }
 }
