@@ -1,14 +1,11 @@
 package com.example.githubapi.ui
 
 import android.os.Bundle
-import android.util.Log
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapi.R
-import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
@@ -19,15 +16,20 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         adapter = RepositoryAdapter()
+        setupObservers()
+        setupRecyclerView()
+        viewModel.getRepositories()
+    }
 
+    private fun setupRecyclerView() {
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+    }
 
-        lifecycleScope.launch {
-            viewModel.getRepositories().collect { pagingData ->
-                adapter.submitData(pagingData)
-            }
+    private fun setupObservers() {
+        viewModel.repositories.observe(this) { pagingData ->
+            adapter.submitData(lifecycle, pagingData)
         }
     }
 }
