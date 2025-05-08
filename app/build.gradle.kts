@@ -44,8 +44,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-
-
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.jetbrains.kotlinx.serialization.json)
@@ -53,18 +51,20 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin)
     implementation(libs.paging)
-    testImplementation(libs.jetbrains.kotlin.coroutines.test)
-
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.mockk)
-    testImplementation(libs.room.testing)
-    testImplementation(libs.androidx.test.core)
-
     implementation(libs.room)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
+    implementation(libs.androidx.espresso.contrib)
     ksp(libs.room.compiler)
+
+    testImplementation(libs.jetbrains.kotlin.coroutines.test)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.espresso.contrib)
 }
+

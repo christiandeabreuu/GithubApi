@@ -17,12 +17,20 @@ koin = "3.5.0"
 paging = "3.2.1"
 jetbrains-kotlinx-coroutines-test = "1.7.3"
 mockk = "1.13.5"
+espressoContribi = "3.6.1"
+
+androidx-contrib = "3.5.1"
+espressoContrib = "3.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "junitVersion" }
+
+#noinspection SimilarGradleDependency
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -42,6 +50,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.
 room-paging = { group = "androidx.room", name = "room-paging", version = "2.5.2" }
 room-testing = { group = "androidx.room", name = "room-testing", version = "2.5.2" }
 androidx-test-core = { group = "androidx.test", name = "core", version = "1.5.0" }
+androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 
 [plugins]
