@@ -7,21 +7,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.githubapi.R
-import com.example.githubapi.data.Repository
+import com.example.githubapi.data.GitHubRepo
 
-class RepositoryAdapter : PagingDataAdapter<Repository, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class RepositoryAdapter : PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repository>() {
-            override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubRepo>() {
+            override fun areItemsTheSame(oldItem: GitHubRepo, newItem: GitHubRepo): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean {
+            override fun areContentsTheSame(oldItem: GitHubRepo, newItem: GitHubRepo): Boolean {
                 return oldItem == newItem
             }
         }
