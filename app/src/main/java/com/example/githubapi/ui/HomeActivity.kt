@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = RepositoryAdapter()
-        findViewById<RecyclerView>(R.id.recycler_view).apply {
+        findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = this@HomeActivity.adapter
         }

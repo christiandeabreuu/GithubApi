@@ -21,7 +21,7 @@ class RepoGitHubRepositoryTest {
 
     @Before
     fun setup() {
-        every { database.repositoryDao() } returns dao // 🔥 Simula a conexão com o DAO
+        every { database.repositoryDao() } returns dao //  Simula a conexão com o DAO
         repository = RepoGitHubRepository(api, database)
     }
 

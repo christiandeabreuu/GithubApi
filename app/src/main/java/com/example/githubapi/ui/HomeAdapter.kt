@@ -9,6 +9,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.githubapi.R
 import com.example.githubapi.data.model.GitHubRepo
 
@@ -50,6 +51,7 @@ class RepositoryAdapter :
         holder.ownerName.text = repo?.owner?.login
 
         holder.ownerImage.load(repo?.owner?.avatar_url) {
+            transformations(CircleCropTransformation())
             placeholder(R.drawable.ic_launcher_background)
             error(R.drawable.ic_launcher_foreground)
         }
