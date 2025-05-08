@@ -7,6 +7,7 @@ import org.koin.dsl.module
 import com.example.githubapi.data.model.RepoGitHubRepository
 import com.example.githubapi.domain.RepoGitHubUseCase
 import com.example.githubapi.ui.HomeViewModel
+import com.example.githubapi.utils.Constants.BASE_URL
 import org.koin.androidx.viewmodel.dsl.viewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,7 +26,7 @@ val appModule = module {
 
 val networkModule = module {
     single {
-        Retrofit.Builder().baseUrl("https://api.github.com/")
+        Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
             .create(GitHubService::class.java)
     }

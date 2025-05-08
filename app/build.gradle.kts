@@ -44,9 +44,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
@@ -55,8 +53,16 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin)
     implementation(libs.paging)
-    implementation(libs.jetbrains.kotlin.coroutines.test)
+    testImplementation(libs.jetbrains.kotlin.coroutines.test)
+
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.mockk)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.androidx.test.core)
+
     implementation(libs.room)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
