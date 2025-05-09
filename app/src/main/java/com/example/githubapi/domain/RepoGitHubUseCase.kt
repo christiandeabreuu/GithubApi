@@ -1,11 +1,13 @@
 package com.example.githubapi.domain
 
-import com.example.githubapi.data.RepoGitHubRepository
-import com.example.githubapi.data.Repository
+import androidx.paging.PagingData
+import com.example.githubapi.data.model.RepoGitHubRepository
+import com.example.githubapi.data.model.GitHubRepo
+import kotlinx.coroutines.flow.Flow
 
 class RepoGitHubUseCase(private val repository: RepoGitHubRepository) {
 
-    suspend fun execute(page: Int): List<Repository> {
-        return repository.getTopRepositories(page)
+    fun execute(): Flow<PagingData<GitHubRepo>> {
+        return repository.getTopRepositories()
     }
 }

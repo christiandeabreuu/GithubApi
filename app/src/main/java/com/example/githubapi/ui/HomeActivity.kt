@@ -1,39 +1,45 @@
 package com.example.githubapi.ui
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapi.R
-import com.example.githubapi.data.RepoGitHubRepository
-import com.example.githubapi.data.RetrofitClient
-import com.example.githubapi.domain.RepoGitHubUseCase
+import com.example.githubapi.databinding.ActivityHomeBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var adapter: RepositoryAdapter
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        enableEdgeToEdge()
+        setupRecyclerView()
+        setupObservers()
+        viewModel.getRepositories()
+    }
 
-        val repository = RepoGitHubRepository(RetrofitClient.instance)
-        val useCase = RepoGitHubUseCase(repository)
-
-        val factory = HomeViewModelFactory(useCase)
-        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-
-        adapter = RepositoryAdapter()
-
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-
-        viewModel.repositories.observe(this) { list ->
-            adapter.submitList(list)
+    private fun setupRecyclerView() {
+        adapter = RepositoryAdapter(context = this)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            adapter = this@HomeActivity.adapter
         }
+    }
 
-        viewModel.fetchRepositories()
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            viewModel.repositories.collectLatest { pagingData ->
+                adapter.submitData(pagingData)
+            }
+        }
     }
 }

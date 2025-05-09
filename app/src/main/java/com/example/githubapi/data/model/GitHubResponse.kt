@@ -1,10 +1,10 @@
-package com.example.githubapi.data
+package com.example.githubapi.data.model
 
 data class GitHubResponse(
-    val items: List<Repository>
+    val items: List<GitHubRepo>
 )
 
-data class Repository(
+data class GitHubRepo(
     val id: Int,
     val name: String,
     val stargazers_count: Int,

@@ -3,49 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:padding="@dimen/margin_12">
 
     <ImageView
         android:id="@+id/owner_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/margin_70"
+        android:layout_height="@dimen/margin_70"
+        android:contentDescription="@string/imagem_do_autor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/repo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do Repositório"
+        android:text="@string/name_repository"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_12"
+        android:textAlignment="viewStart"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:layout_marginStart="@dimen/margin_12"
+
         app:layout_constraintStart_toEndOf="@id/owner_image"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/repo_stars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="⭐ 0"
-        app:layout_constraintStart_toStartOf="@id/repo_name"
-        app:layout_constraintTop_toBottomOf="@id/repo_name"/>
+        android:text="@string/stars_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_12"
+        android:textAlignment="gravity"
+        android:layout_marginStart="@dimen/margin_12"
+
+        app:layout_constraintStart_toEndOf="@id/owner_image"
+        app:layout_constraintTop_toBottomOf="@id/repo_name" />
 
     <TextView
         android:id="@+id/repo_forks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🔁 0"
-        app:layout_constraintStart_toStartOf="@id/repo_stars"
-        app:layout_constraintTop_toBottomOf="@id/repo_stars"/>
+        android:text="@string/text_repo"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_12"
+        android:textAlignment="gravity"
+        android:layout_marginStart="@dimen/margin_12"
+
+        app:layout_constraintStart_toEndOf="@id/owner_image"
+        app:layout_constraintTop_toBottomOf="@id/repo_stars" />
 
     <TextView
         android:id="@+id/owner_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Autor"
+        android:text="@string/autor"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_12"
+        android:textAlignment="gravity"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@id/repo_name"
-        app:layout_constraintTop_toBottomOf="@id/repo_forks"/>
+        android:layout_marginStart="@dimen/margin_12"
+        app:layout_constraintStart_toEndOf="@id/owner_image"
+        app:layout_constraintTop_toBottomOf="@id/repo_forks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

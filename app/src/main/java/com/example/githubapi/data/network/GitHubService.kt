@@ -1,5 +1,6 @@
-package com.example.githubapi.data
+package com.example.githubapi.data.network
 
+import com.example.githubapi.data.model.GitHubResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

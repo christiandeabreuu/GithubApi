@@ -1,6 +1,6 @@
 [versions]
 agp = "8.8.0"
-kotlin = "1.9.24"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -14,12 +14,22 @@ jetbrains-kotlinx = "1.5.1"
 coil = "2.4.0"
 lifecycle = "2.8.7"
 koin = "3.5.0"
+paging = "3.2.1"
+jetbrains-kotlinx-coroutines-test = "1.7.3"
+mockk = "1.13.5"
+espressoContrib = "3.6.1"
+room = "2.5.2"
+android-test-core = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "junitVersion" }
+
+#noinspection SimilarGradleDependency
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -30,6 +40,17 @@ jetbrains-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name =
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+jetbrains-kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "jetbrains-kotlinx-coroutines-test" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "android-test-core" }
+#noinspection SimilarGradleDependency
+androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 
 [plugins]
