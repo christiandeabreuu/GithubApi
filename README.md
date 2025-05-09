@@ -35,4 +35,4 @@ Este é um aplicativo Android que consome a API do GitHub para exibir os reposit
 ---
 
 ## 📜 Como Executar  
- Clone este repositório em sua máquina local 
+ Clone este repositório em sua máquina local e utilizar a branch master
