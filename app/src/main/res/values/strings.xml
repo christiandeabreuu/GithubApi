@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GithubApi</string>
+    <string name="title">Top Repositórios</string>
+    <string name="imagem_do_autor">imagem do autor</string>
+    <string name="logo_github">logo_github</string>
+    <string name="name_repository">Nome do Repositório</string>
+    <string name="stars_text">⭐ 0</string>
+    <string name="text_repo">🔁 0</string>
+    <string name="autor">Autor</string>
 </resources>

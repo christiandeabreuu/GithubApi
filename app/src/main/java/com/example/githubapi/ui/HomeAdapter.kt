@@ -1,10 +1,10 @@
 package com.example.githubapi.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +12,11 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.githubapi.R
 import com.example.githubapi.data.model.GitHubRepo
+import com.example.githubapi.databinding.ItemRepositoryBinding
 
-class RepositoryAdapter :
-    PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class RepositoryAdapter(private val context: Context) : PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+
+    private var failedImageCount = 0 // 🔥 Contador de imagens com erro
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubRepo>() {
@@ -28,32 +30,38 @@ class RepositoryAdapter :
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.repo_name)
-        val stars: TextView = view.findViewById(R.id.repo_stars)
-        val forks: TextView = view.findViewById(R.id.repo_forks)
-        val ownerImage: ImageView = view.findViewById(R.id.owner_image)
-        val ownerName: TextView = view.findViewById(R.id.owner_name)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, context, this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
-        return ViewHolder(view)
+    class ViewHolder(private val binding: ItemRepositoryBinding, private val context: Context, private val adapter: RepositoryAdapter) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        @SuppressLint("SetTextI18n")
+        fun bind(repo: GitHubRepo?) {
+            binding.repoName.text = repo?.name
+            binding.repoStars.text = "⭐ ${repo?.stargazers_count}"
+            binding.repoForks.text = "🔁 ${repo?.forks_count}"
+            binding.ownerName.text = repo?.owner?.login
+
+            binding.ownerImage.load(repo?.owner?.avatar_url) {
+                transformations(CircleCropTransformation())
+                placeholder(R.drawable.ic_launcher_background)
+                error(R.drawable.ic_launcher_foreground)
+                listener(onError = { _, _ ->
+                    adapter.failedImageCount++ // 🔥 Incrementa contador de erro
+
+                    if (adapter.failedImageCount == adapter.itemCount) { // 🔥 Se todas falharem, exibe Toast
+                        Toast.makeText(context, "Nenhuma imagem carregada!", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = getItem(position)
-
-        holder.name.text = repo?.name
-        holder.stars.text = "⭐ ${repo?.stargazers_count}"
-        holder.forks.text = "🔁 ${repo?.forks_count}"
-        holder.ownerName.text = repo?.owner?.login
-
-        holder.ownerImage.load(repo?.owner?.avatar_url) {
-            transformations(CircleCropTransformation())
-            placeholder(R.drawable.ic_launcher_background)
-            error(R.drawable.ic_launcher_foreground)
-        }
+        holder.bind(repo)
     }
 }
