@@ -16,11 +16,17 @@ class HomeViewModel(private val githubUseCase: RepoGitHubUseCase) : ViewModel() 
     private val _repositories = MutableStateFlow<PagingData<GitHubRepo>>(PagingData.empty())
     val repositories: StateFlow<PagingData<GitHubRepo>> = _repositories
 
-    fun getRepositories() {
+    init {
+        getRepositories()
+    }
+
+    private fun getRepositories() {
         viewModelScope.launch {
             githubUseCase.execute().cachedIn(viewModelScope).collectLatest { pagingData ->
-                    _repositories.value = pagingData
-                }
+                _repositories.value = pagingData
+            }
         }
     }
 }
+
+
