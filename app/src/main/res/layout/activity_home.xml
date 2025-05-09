@@ -7,9 +7,9 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_marginTop="@dimen/margin_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
         android:text="@string/title"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white"
@@ -24,12 +24,12 @@
         android:layout_width="@dimen/margin_35"
         android:layout_height="@dimen/margin_35"
         android:layout_marginStart="@dimen/margin_5"
-        android:src="@drawable/github_logo"
         android:contentDescription="@string/logo_github"
-        app:shapeAppearanceOverlay="@style/CircleImageView"
+        android:src="@drawable/github_logo"
         app:layout_constraintBottom_toBottomOf="@id/title"
         app:layout_constraintStart_toEndOf="@id/title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImageView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

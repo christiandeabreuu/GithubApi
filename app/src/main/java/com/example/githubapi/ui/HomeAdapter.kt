@@ -14,9 +14,10 @@ import com.example.githubapi.R
 import com.example.githubapi.data.model.GitHubRepo
 import com.example.githubapi.databinding.ItemRepositoryBinding
 
-class RepositoryAdapter(private val context: Context) : PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class RepositoryAdapter(private val context: Context) :
+    PagingDataAdapter<GitHubRepo, RepositoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var failedImageCount = 0 // 🔥 Contador de imagens com erro
+    private var failedImageCount = 0
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubRepo>() {
@@ -31,12 +32,16 @@ class RepositoryAdapter(private val context: Context) : PagingDataAdapter<GitHub
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, context, this)
     }
 
-    class ViewHolder(private val binding: ItemRepositoryBinding, private val context: Context, private val adapter: RepositoryAdapter) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ItemRepositoryBinding,
+        private val context: Context,
+        private val adapter: RepositoryAdapter
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun bind(repo: GitHubRepo?) {
@@ -50,10 +55,11 @@ class RepositoryAdapter(private val context: Context) : PagingDataAdapter<GitHub
                 placeholder(R.drawable.ic_launcher_background)
                 error(R.drawable.ic_launcher_foreground)
                 listener(onError = { _, _ ->
-                    adapter.failedImageCount++ // 🔥 Incrementa contador de erro
+                    adapter.failedImageCount++
 
-                    if (adapter.failedImageCount == adapter.itemCount) { // 🔥 Se todas falharem, exibe Toast
-                        Toast.makeText(context, "Nenhuma imagem carregada!", Toast.LENGTH_SHORT).show()
+                    if (adapter.failedImageCount == adapter.itemCount) {
+                        Toast.makeText(context, "Nenhuma imagem carregada!", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 })
             }
