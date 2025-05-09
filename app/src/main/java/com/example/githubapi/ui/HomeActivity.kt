@@ -1,7 +1,6 @@
 package com.example.githubapi.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +23,6 @@ class HomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setupRecyclerView()
         setupObservers()
-
     }
 
     private fun setupRecyclerView() {
